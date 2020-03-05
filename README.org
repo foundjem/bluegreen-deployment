@@ -1,4 +1,4 @@
-#+TITLE:	INF 8007 TPs
+#+TITLE:	Docker Swarm -- Blue-Green Deployment
 #+SUBTITLE: Web scraping for DevOps
 #+AUTHOR:	Armstrong
 #+EMAIL:	foundjem@ieee.org
@@ -26,12 +26,12 @@
 -----
 * About
 In Blue Green Deployment, you have TWO complete environments.
-
+#+BEGINE_QUOTE
 One is Blue environment which is running and the Green environment to which you
  want to upgrade. Once you swap the environment from blue to green, the traffic
  is directed to your new green environment.
  You can delete or save your old blue environment for backup until the green environment is stable.
-
+#+END_QUOTE
 * Tutorials
 You can follow the tutorials in the attached .pdf file with instructions.
 
@@ -98,7 +98,7 @@ curl localhost:8080
 
 
 ** Contributors
-This project exists thanks to @stevvooe
+This project exists thanks to @foundjem and @stevvooe
 
 ** License
 [[https://choosealicense.com/licenses/mit/][MIT]]  © Armstrong Foundjem
