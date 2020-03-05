@@ -37,7 +37,7 @@ One is Blue environment which is running and the Green environment to which you
 
 
 * Tutorials
-You can follow the tutorials in the attached .pdf file with instructions.
+You can follow the tutorials in the attached [[BlueGreen-Deployment.pdf]] file with instructions.
 
 #+begin_src sh
 git clone https://github.com/foundjem/bluegreen-eployment.git
