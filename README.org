@@ -1,0 +1,107 @@
+#+TITLE:	INF 8007 TPs
+#+SUBTITLE: Web scraping for DevOps
+#+AUTHOR:	Armstrong
+#+EMAIL:	foundjem@ieee.org
+#+DATE:		2020-01-27
+#+UPDATE:	08:35:36
+
+
+[[https://travis-ci.org/snosov1/toc-org][file:https://api.travis-ci.org/snosov1/toc-org.svg?branch=master]]
+[[https://img.shields.io/badge/PRs-welcome-brightgreen][file:https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square]]
+[[https://david-dm.org/stevenh77/personal-website][file:https://david-dm.org/stevenh77/personal-website.svg]]
+[[https://badge.fury.io/gh/stevenh77%2Fpersonal-website][file:https://badge.fury.io/gh/stevenh77%2Fpersonal-website.svg]]
+[[https://img.shields.io/badge/standard--readme-OK-green][file:https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square]]
+[[https://api.codacy.com/project/badge/Grade/b9eccad0f25a459db410259c89fdc78b][file:/img/b9eccad0f25a459db410259c89fdc78b.svg]]
+[[https://coveralls.io/github/tdhock/namedCapture?branch=master][file:https://coveralls.io/repos/tdhock/namedCapture/badge.svg?branch=master&service=github]]
+
+#+BEGIN_QUOTE
+*Objectives*: To understand how blue-green deployment works!
+#+END_QUOTE
+
+* Table of Contents
+- [[#about][About]]
+- [[#tutorials][Tutorials]]
+  - [[#contributors][Contributors]]
+- [[#license][License]]
+-----
+* About
+In Blue Green Deployment, you have TWO complete environments.
+
+One is Blue environment which is running and the Green environment to which you
+ want to upgrade. Once you swap the environment from blue to green, the traffic
+ is directed to your new green environment.
+ You can delete or save your old blue environment for backup until the green environment is stable.
+
+* Tutorials
+You can follow the tutorials in the attached .pdf file with instructions.
+
+#+begin_src sh
+git clone https://github.com/foundjem/bluegreen-eployment.git
+
+cd bluegreen-eployment
+
+docker swarm init
+
+docker network create --driver overlay backend
+
+docker network create --driver overlay backend
+
+docker service create --name myapp-v1 --network backend -p7999:8080 myapp
+
+docker service ls
+
+docker build -t sillyproxy .
+
+docker service create --name proxy --network backend -p8080:8080
+
+curl -v localhost:8080/
+
+curl localhost:7999
+
+# Scaling the Service
+
+docker service ls
+
+docker service scale myapp-v1=4 proxy=2
+
+docker service ls
+
+
+# list all six containers ; six times this command
+$ curl localhost:8080
+
+# Deploying a new version
+docker service create --name myapp-v2 --network backend -e V2=1 -p7998:8080 myapp
+
+docker service update --env-add GREEN=http://myapp-v2:8080/ --env-add GREEN_WEIGHT=1 --env-add BLUE_WEIGHT=4 proxy
+
+# six times this command
+curl localhost:8080
+
+# Moving to Green
+docker service scale myapp-v2=4
+
+docker service update --env-rm GREEN_WEIGHT --env-rm BLUE_WEIGHT --env-rm BLUE proxy
+
+docker service ls
+
+# three times
+curl localhost:8080
+
+# Rollback
+docker service update --env-rm GREEN --env-add BLUE=http://myapp-v1:8080 proxy
+
+curl localhost:8080
+
+#+end_src
+
+
+
+** Contributors
+This project exists thanks to @stevvooe
+
+** License
+[[https://choosealicense.com/licenses/mit/][MIT]]  © Armstrong Foundjem
+#+html: <a href="https://opensource.org/licenses/MIT">
+#+html:   <img src="https://img.shields.io/:license-mit-blue.svg" alt=":license-gpl-blue.svg" />
+#+html: </a>
