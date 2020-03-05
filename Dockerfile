@@ -1,6 +1,6 @@
 FROM golang:1.7-alpine
 
-COPY . /go/src/github.com/stevvooe/sillyproxy
-RUN go install github.com/stevvooe/sillyproxy
+COPY . /go/src/github.com/foundjem/bluegreen-deployment
+RUN go install github.com/foundjem/bluegreen-deployment
 
-ENTRYPOINT ["/go/bin/sillyproxy"]`
+ENTRYPOINT ["/go/bin/bluegreen-deployment"]`

@@ -18,7 +18,7 @@ import (
 
 var (
 	addr   string
-	logger = log.New(os.Stderr, "sillyproxy: ", log.Flags())
+	logger = log.New(os.Stderr, "bluegreen-deployment: ", log.Flags())
 )
 
 func init() {
