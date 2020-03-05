@@ -26,12 +26,16 @@
 -----
 * About
 In Blue Green Deployment, you have TWO complete environments.
-#+BEGINE_QUOTE
+
+#+BEGIN_QUOTE
 One is Blue environment which is running and the Green environment to which you
  want to upgrade. Once you swap the environment from blue to green, the traffic
  is directed to your new green environment.
  You can delete or save your old blue environment for backup until the green environment is stable.
 #+END_QUOTE
+
+
+
 * Tutorials
 You can follow the tutorials in the attached .pdf file with instructions.
 
