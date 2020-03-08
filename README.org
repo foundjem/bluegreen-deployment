@@ -40,9 +40,9 @@ One is Blue environment which is running and the Green environment to which you
 You can follow the tutorials in the attached [[BlueGreen-Deployment.pdf]] file with instructions.
 
 #+begin_src sh
-git clone https://github.com/foundjem/bluegreen-eployment.git
+git clone https://github.com/foundjem/bluegreen-deployment.git
 
-cd bluegreen-eployment
+cd bluegreen-deployment
 
 docker swarm init
 
@@ -54,7 +54,7 @@ docker service create --name myapp-v1 --network backend -p7999:8080 myapp
 
 docker service ls
 
-docker build -t sillyproxy .
+docker build -t bluegreen-deployment .
 
 docker service create --name proxy --network backend -p8080:8080
 
